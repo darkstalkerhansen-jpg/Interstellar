@@ -1,0 +1,41 @@
+pipeline:
+  id: pipeline_darkstalkerhansen_jpg_Interstellar_build_ebd9
+  name: pipeline_darkstalkerhansen_jpg_Interstellar_build_ebd9
+  stages:
+    - name: CI
+      id: ci
+      runtime: cloud
+      platform:
+        os: linux
+        arch: amd64
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - name: Setup and Install
+          id: setup_install
+          run:
+            shell: bash
+            script: |-
+              # Enable Corepack and prepare pnpm
+              corepack enable
+              corepack prepare pnpm@10.33.0 --activate
+
+              # Verify pnpm is available
+              pnpm --version
+
+              # Install dependencies
+              pnpm install --frozen-lockfile
+        - name: Build
+          id: build
+          run:
+            shell: bash
+            script: pnpm run build
+        - name: Lint
+          id: lint
+          run:
+            shell: bash
+            script: pnpm run lint
+  tags:
+    onboarding: "true"
