@@ -2061,7 +2061,7 @@ async function build() {
 
   const gateRenames = new Map([...identifierRenames, ["Ultraviolet", ultravioletName]]);
   for (const spec of specs) for (const name of spec.globals ?? []) if (name.startsWith(UV_PREFIX) && !gateRenames.has(name)) gateRenames.set(name, name.replace(UV_PREFIX, uvPrefixName));
-  const { checkedReferences } = await verifyBuild({ manifest, specs, emitted, references, distJsFiles, /* serverRoutes: manifest.analytics ? [manifest.analytics.loader] : [], */ identifierRenames: gateRenames, swLocalRenames });
+  const { checkedReferences } = await verifyBuild({ manifest, specs, emitted, references, distJsFiles, serverRoutes: ["/_vercel/speed-insights/script.js"], /* serverRoutes: manifest.analytics ? [manifest.analytics.loader] : [], */ identifierRenames: gateRenames, swLocalRenames });
   console.log(chalk.green(`  all checks passed (${emitted.size} emitted assets, ${distJsFiles.length} scripts parsed, ${checkedReferences} asset references resolved across ${references.length} files)`));
 
   console.log(chalk.green("\nBuild complete -> dist/"));
