@@ -1,4 +1,4 @@
-(function () {
+(() => {
   const MEASUREMENT_ID = "GT-K46PHV4";
   if (!/^(GT|G)-[A-Z0-9]+$/.test(MEASUREMENT_ID)) return;
 

@@ -1,4 +1,4 @@
-(function () {
+(() => {
   const REASONS = {
     families: "Cloudflare Families blocks this site for malware or adult content.",
     ads: "This site is on the AdGuard ad filter.",
